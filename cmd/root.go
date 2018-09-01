@@ -50,7 +50,6 @@ var RootCmd = &cobra.Command{
 			results, err := kubeval.Validate(buffer.Bytes(), viper.GetString("filename"))
 			if err != nil {
 				log.Error(err)
-				os.Exit(1)
 			}
 			success = logResults(results, success)
 		} else {
@@ -83,14 +82,16 @@ func logResults(results []kubeval.ValidationResult, success bool) bool {
 	for _, result := range results {
 		if len(result.Errors) > 0 {
 			success = false
-			log.Warn("The document", result.FileName, "contains an invalid", result.Kind)
+			log.Error(result.Kind, result.ResourceName, "was invalid.")
 			for _, desc := range result.Errors {
-				log.Info("--->", desc)
+				log.Warn(" --->", result.Kind, result.ResourceName, desc)
 			}
 		} else if result.Kind == "" {
-			log.Success("The document", result.FileName, "is empty")
+			// log.Success("The document", result.FileName, "is empty")
+		} else if result.FileName == "stdin" {
+			// log.Success("Successfully validated", result.Kind, result.ResourceName)
 		} else {
-			log.Success("The document", result.FileName, "contains a valid", result.Kind)
+			// log.Success("The document", result.FileName, "contains a valid", result.Kind)
 		}
 	}
 	return success

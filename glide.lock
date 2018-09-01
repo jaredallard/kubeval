@@ -1,16 +1,16 @@
 hash: a8f1c32432725d048acd212267b87ac65a45259a64492371e95ff9357458098c
-updated: 2018-08-21T13:34:31.8946956+01:00
+updated: 2018-09-01T14:09:41.115945759-07:00
 imports:
 - name: github.com/fatih/color
   version: 5b77d2a35fb0ede96d138fc9a99f5c9b6aef11b4
 - name: github.com/fsnotify/fsnotify
-  version: c2828203cd70a50dcccfb2761f8b1f8ceef9a8e9
+  version: ccc981bf80385c528a65fbfdd49bf2d8da22aa23
 - name: github.com/hashicorp/errwrap
-  version: d6c0cd88035724dd42e0f335ae30161c20575ecc
+  version: 8a6fb523712970c966eefc6b39ed2c5e74880354
 - name: github.com/hashicorp/go-multierror
-  version: 3d5d8f294aa03d8e98859feac328afbdf1ae0703
+  version: 886a7fbe3eb1c874d46f623bfa70af45f425b3d1
 - name: github.com/hashicorp/hcl
-  version: ef8a98b0bbce4a65b5aa4c368430a80ddc533168
+  version: 8cb6e5b959231cc1119e43259c4a608f9c51a241
   subpackages:
   - hcl/ast
   - hcl/parser
@@ -28,9 +28,9 @@ imports:
 - name: github.com/mattn/go-colorable
   version: efa589957cd060542a26d2dd7832fd6a6c6c3ade
 - name: github.com/mattn/go-isatty
-  version: 6ca4dbf54d38eea1a992b3c722a76a5d1c4cb25c
+  version: 66b8e73f3f5cda9f96b69efd03dd3d7fc4a5cdb8
 - name: github.com/mitchellh/mapstructure
-  version: f15292f7a699fcc1a38a80977f80a046874ba8ac
+  version: fa473d140ef3c6adf42d6b391fe76707f1f243c8
 - name: github.com/pelletier/go-toml
   version: c2dbbc24a97911339e01bda0b8cabdbd8f13b602
 - name: github.com/spf13/afero
@@ -40,11 +40,11 @@ imports:
 - name: github.com/spf13/cast
   version: 8965335b8c7107321228e3e3702cab9832751bac
 - name: github.com/spf13/cobra
-  version: ff0d02e8555041edecbd0ce27f32c6ea4b214483
+  version: 615425954c3b0d9485a7027d4d451fdcdfdee84e
 - name: github.com/spf13/jwalterweatherman
   version: 14d3d4c518341bea657dd8a226f5121c0ff8c9f2
 - name: github.com/spf13/pflag
-  version: d929dcbb10863323c436af3cf76cb16a6dfc9b29
+  version: 9a97c102cda95a86cec2345a6f09f55a939babf5
 - name: github.com/spf13/viper
   version: 907c19d40d9a6c9bb55f040ff4ae45271a4754b9
 - name: github.com/xeipuuv/gojsonpointer
@@ -54,14 +54,14 @@ imports:
 - name: github.com/xeipuuv/gojsonschema
   version: da425ebb7609ba06a0f395fc8a254d1c303364a0
 - name: golang.org/x/sys
-  version: 4ea2f632f6e912459fe60b26b1749377f0d889d5
+  version: 95c6576299259db960f6c5b9b69ea52422860fce
   subpackages:
   - unix
 - name: golang.org/x/text
-  version: 6e3c4e7365ddcc329f090f96e4348398f6310088
+  version: b19bf474d317b857955b12035d2c5acb57ce8b01
   subpackages:
   - transform
   - unicode/norm
 - name: gopkg.in/yaml.v2
-  version: 5420a8b6744d3b0345ab293f6fcba19c978f1183
+  version: 670d4cfef0544295bc27a114dbac37980d83185a
 testImports: []

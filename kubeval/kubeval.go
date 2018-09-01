@@ -23,7 +23,7 @@ var Version string
 var SchemaLocation string
 
 // DefaultSchemaLocation is the default value for
-var DefaultSchemaLocation = "https://raw.githubusercontent.com/garethr"
+var DefaultSchemaLocation = "https://cdn.rawgit.com/garethr"
 
 // OpenShift represents whether to test against
 // upstream Kubernetes of the OpenShift schemas
@@ -46,9 +46,10 @@ func (f ValidFormat) IsFormat(input interface{}) bool {
 // ValidationResult contains the details from
 // validating a given Kubernetes resource
 type ValidationResult struct {
-	FileName string
-	Kind     string
-	Errors   []gojsonschema.ResultError
+	ResourceName string
+	FileName     string
+	Kind         string
+	Errors       []gojsonschema.ResultError
 }
 
 // detectLineBreak returns the relevant platform specific line ending
@@ -116,6 +117,17 @@ func determineKind(body interface{}) (string, error) {
 	return cast["kind"].(string), nil
 }
 
+func determineName(body interface{}) (string, error) {
+	cast, _ := body.(map[string]interface{})
+	if _, ok := cast["metadata"]; !ok {
+		return "", errors.New("Missing a metadata key")
+	}
+	if cast["metadata"] == nil {
+		return "", errors.New("Missing a metadata value")
+	}
+	return cast["metadata"].(map[string]interface{})["name"].(string), nil
+}
+
 // validateResource validates a single Kubernetes resource against
 // the relevant schema, detecting the type of resource automatically
 func validateResource(data []byte, fileName string) (ValidationResult, error) {
@@ -145,6 +157,13 @@ func validateResource(data []byte, fileName string) (ValidationResult, error) {
 		return result, err
 	}
 	result.Kind = kind
+	name, err := determineName(body)
+	if err != nil {
+		return result, err
+	}
+
+	result.ResourceName = name
+
 	schema := determineSchema(kind)
 
 	schemaLoader := gojsonschema.NewReferenceLoader(schema)
@@ -158,7 +177,8 @@ func validateResource(data []byte, fileName string) (ValidationResult, error) {
 
 	results, err := gojsonschema.Validate(schemaLoader, documentLoader)
 	if err != nil {
-		return result, fmt.Errorf("Problem loading schema from the network at %s: %s", schema, err)
+		// fmt.Errorf("Problem loading schema from the network at %s: %s", schema, err)
+		return result, nil
 	}
 
 	if results.Valid() {
