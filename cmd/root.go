@@ -51,6 +51,8 @@ var RootCmd = &cobra.Command{
 			if err != nil {
 				log.Error(err)
 			}
+
+			log.Info("successfully validated", len(results), "files.")
 			success = logResults(results, success)
 		} else {
 			if len(args) < 1 {
@@ -84,7 +86,7 @@ func logResults(results []kubeval.ValidationResult, success bool) bool {
 			success = false
 			log.Error(result.Kind, result.ResourceName, "was invalid.")
 			for _, desc := range result.Errors {
-				log.Warn(" --->", result.Kind, result.ResourceName, desc)
+				log.Info(" --->", result.Kind, result.ResourceName, desc)
 			}
 		} else if result.Kind == "" {
 			// log.Success("The document", result.FileName, "is empty")
